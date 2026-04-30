@@ -1,35 +1,23 @@
 @import "tailwindcss";
-@import "@fontsource/playfair-display/400.css";
-@import "@fontsource/playfair-display/700.css";
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
 
 :root {
-  /* Core palette — grounded & earthy */
-  --color-soil: #1C1F1A;        /* near-black with green undertone — backgrounds */
-  --color-moss: #2D4A3E;        /* deep forest green — primary accent */
-  --color-sage: #4A7C68;        /* mid green — secondary accent */
-  --color-fern: #7DAF9A;        /* light green — hover states, highlights */
-  --color-cream: #F5F0E8;       /* warm off-white — primary text on dark */
-  --color-linen: #EDE8DC;       /* slightly darker cream — secondary text */
-  --color-amber: #C4873A;       /* warm amber — call to action, links */
-  --color-amber-light: #E8A857; /* lighter amber — hover states */
-  --color-bark: #3D2E1E;        /* deep warm brown — subtle borders */
+  --pine:    #1a2421;
+  --fern:    #2E4A3E;
+  --sage:    #536B5E;
+  --bone:    #FAF8F5;
+  --linen:   #F0EDE8;
+  --canvas:  #E4DFD8;
+  --mustard: #C4882A;
+  --amber:   #D4A04A;
+  --rust:    #A84832;
+  --terra:   #C0614A;
+  --ink:     #221F1A;
+  --mid:     #4A4238;
+  --muted:   #8A8070;
 
-  /* Typography */
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body: 'Inter', -apple-system, sans-serif;
-
-  /* Spacing scale */
-  --space-section: 6rem;
-  --space-component: 3rem;
-
-  /* Transitions */
-  --transition-base: 200ms ease;
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -37,44 +25,26 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
-  background-color: var(--color-soil);
-  color: var(--color-cream);
-  font-family: var(--font-body);
+  background: var(--pine);
+  color: var(--bone);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-weight: 300;
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
-}
-
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--color-cream);
-}
-
-h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
-h2 { font-size: clamp(1.8rem, 3vw, 3rem); }
-h3 { font-size: clamp(1.3rem, 2vw, 1.8rem); }
-
-p {
-  color: var(--color-linen);
-  max-width: 65ch;
-}
-
-a {
-  color: var(--color-amber);
-  text-decoration: none;
-  transition: color var(--transition-base);
-}
-
-a:hover {
-  color: var(--color-amber-light);
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 ::selection {
-  background-color: var(--color-moss);
-  color: var(--color-cream);
+  background: var(--fern);
+  color: var(--bone);
 }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--pine); }
+::-webkit-scrollbar-thumb { background: var(--fern); border-radius: 2px; }

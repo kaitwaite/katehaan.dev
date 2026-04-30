@@ -1,697 +1,316 @@
-const projects = [
-  {
-    number: "01",
-    title: "OpenClaw personal AI system",
-    description:
-      "Built a personal AI operating layer that combines agents, structured memory, and daily workflow automation to accelerate execution and decision-making.",
-    tags: ["LLMs", "Agent Orchestration", "TypeScript", "Automation"],
-  },
-  {
-    number: "02",
-    title: "Commercial Realization Engine at Herbalife",
-    description:
-      "Designed an enterprise analytics and activation framework that connected sales, marketing, and operations signals to improve planning and measurable commercial impact.",
-    tags: ["Data Strategy", "Measurement", "Attribution", "Executive Dashboards"],
-  },
-  {
-    number: "03",
-    title: "BI Center of Excellence at Gap",
-    description:
-      "Established a BI Center of Excellence with shared standards, governance, and enablement practices that scaled trusted reporting across business units.",
-    tags: ["Business Intelligence", "Governance", "Data Modeling", "Enablement"],
-  },
-  {
-    number: "04",
-    title: "Digital Analytics at Vera Bradley",
-    description:
-      "Led digital analytics modernization across ecommerce and performance channels, improving funnel visibility and creating stronger experimentation loops.",
-    tags: ["Digital Analytics", "Ecommerce", "Experimentation", "Adobe Analytics"],
-  },
-];
+"use client";
+import { useEffect, useRef } from "react";
 
-const stackCategories = [
+const workItems = [
   {
-    label: "AI & Agents",
-    tools: ["Anthropic API", "Claude Code", "OpenAI API", "Gemini", "Perplexity", "LangChain", "Cursor"],
+    num: "01",
+    title: "OpenClaw — Personal AI Operating System",
+    company: "Personal",
+    desc: "A system of named agents running my home and work life. Heidi handles daily ops. Sage manages health. Finn watches finances. Frank resets sessions nightly to keep costs lean. Built from scratch, runs daily.",
+    tags: ["Anthropic API", "Claude Code", "Python", "Multi-agent"],
+    borderColor: "var(--mustard)",
   },
   {
-    label: "Data & Analytics",
-    tools: [
-      "SQL",
-      "Python",
-      "Power BI",
-      "Tableau",
-      "Looker",
-      "Amplitude",
-      "Heap",
-      "Google Analytics",
-      "Adobe Analytics",
-      "Snowflake",
-      "BigQuery",
-      "Databricks",
-    ],
-  },
-  {
-    label: "Marketing & Experience",
-    tools: [
-      "Salesforce Marketing Cloud",
-      "Salesforce CRM",
-      "Braze",
-      "Adobe Experience Platform",
-      "Tealium",
-      "Adobe Launch",
-      "Adobe Target",
-      "Optimizely",
-    ],
-  },
-  {
-    label: "Engineering & Delivery",
-    tools: ["Azure DevOps", "AWS", "GitHub Actions", "Git", "Vercel", "VS Code"],
-  },
-  {
-    label: "Automation & Integration",
-    tools: [
-      "Make.com",
-      "Zapier",
-      "Power Automate",
-      "Power Apps",
-      "Google APIs",
-      "OAuth 2.0",
-      "Telegram Bot API",
-    ],
-  },
-  {
-    label: "Productivity & Ops",
-    tools: ["SharePoint", "Slack", "Microsoft Teams", "Granola", "OmniFocus", "Obsidian", "Figma", "Gamma"],
-  },
-];
-
-const journeyEntries = [
-  {
+    num: "02",
+    title: "Commercial Realization Engine",
     company: "Herbalife",
-    years: "Nov 2024–Present",
-    title: "Director of Global Measurement, Commercial Realization & MarTech Operations",
-    description:
-      "Built the global digital performance organization from scratch, spanning measurement strategy, campaign operations, and communications platform delivery across global markets. Created the connective tissue between data, media, and execution so teams could move with more clarity and speed.",
+    desc: "Built the global digital performance org from scratch — measurement, campaign ops, and communications platform across global markets. Measurement drives decisioning. The platform delivers the experience.",
+    tags: ["Salesforce MC", "Adobe AEP", "Braze", "Snowflake", "Power BI"],
+    borderColor: "var(--fern)",
   },
   {
+    num: "03",
+    title: "Enterprise BI Center of Excellence",
     company: "Gap Inc.",
-    years: "Nov 2021–Nov 2024",
-    title: "Senior Manager, Enterprise Data Products",
-    description:
-      "Defined the vision and built the Enterprise BI Center of Excellence serving 5000+ weekly active users across a $16B brand portfolio. Led product strategy, operating rhythms, and adoption programs that made trusted data more useful in everyday decisions.",
+    desc: "Defined the vision and built the analytics function serving 5,000+ weekly users across a $16B brand portfolio — Old Navy, Gap, Banana Republic, Athleta. Governance, architecture, self-service adoption.",
+    tags: ["Tableau", "Looker", "Snowflake", "BigQuery", "Data governance"],
+    borderColor: "var(--fern)",
   },
   {
-    company: "Amway",
-    years: "Jan 2020–Nov 2021",
-    title: "Senior Digital Strategist",
-    description:
-      "Owned digital product strategy for a global $8.9B CPG organization, including roadmap planning presented to board and executive leadership. Helped align cross-functional teams around measurable priorities and a more coherent customer experience.",
-  },
-  {
+    num: "04",
+    title: "Digital Analytics Function",
     company: "Vera Bradley",
-    years: "Apr 2016–Jan 2020",
-    title: "Digital Analytics Manager, then Senior Digital Product Owner",
-    description:
-      "Built the Digital Analytics function from scratch and established a scalable measurement foundation for mobile and web. Later led agile product delivery to turn insight into shipped features and stronger digital outcomes.",
+    desc: "Built the analytics capability from zero during a full site re-platform. Owned strategy, tagging, experimentation, and performance reporting end to end. Led weekly executive thought leadership sessions.",
+    tags: ["Google Analytics", "Adobe Launch", "Optimizely", "SQL"],
+    borderColor: "var(--fern)",
   },
-  {
-    company: "Earlier Roles",
-    years: "Before 2016",
-    title: "Meijer and Rosler Metal Finishing",
-    description:
-      "Early chapters at Meijer and Rosler Metal Finishing shaped my approach to operations, analysis, and practical problem solving. Those roles built the foundation for how I lead today: hands-on, people-centered, and outcomes-focused.",
-  },
+];
+
+const toolItems = [
+  { name: "Escalation Advisor", status: "Live", desc: "Should you handle it, escalate it, or skip a level? Answer in 30 seconds.", url: "https://escalation-advisor.katehaan.dev" },
+  { name: "Voice Tone Shifter", status: "Live", desc: "Speak raw. Get back a version that sounds like your actual professional voice.", url: "https://voice-tone-shifter.katehaan.dev" },
+  { name: "CliftonStrengths Analyzer", status: "In dev", desc: "Feed in your team's top 5. Get real insights about dynamics, gaps, and collaboration.", url: "#" },
+  { name: "Kate's Brain", status: "In dev", desc: "Ask your team anything. Get answers in your voice and logic — without scheduling a meeting.", url: "#" },
+];
+
+const strengthItems = [
+  { num: "01", name: "Learner", desc: "The process of growth energizes me as much as the destination. I never stop building expertise." },
+  { num: "02", name: "Futurist", desc: "I see where things are going before others do — and I build the bridge to get there." },
+  { num: "03", name: "Competition", desc: "I measure against the best — and I bring the people around me along for the win." },
+  { num: "04", name: "Focus", desc: "I prioritize ruthlessly and execute with precision. Noise doesn't move me." },
+  { num: "05", name: "Maximizer", desc: "Good enough isn't a stopping point — it's a signal to push further. I elevate everything I touch." },
 ];
 
 export default function Home() {
+  const revealRefs = useRef<HTMLElement[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            (e.target as HTMLElement).style.opacity = "1";
+            (e.target as HTMLElement).style.transform = "translateY(0)";
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
+    revealRefs.current.forEach((el) => { if (el) observer.observe(el); });
+    return () => observer.disconnect();
+  }, []);
+
+  const reveal = (el: HTMLElement | null) => {
+    if (el && !revealRefs.current.includes(el)) {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(22px)";
+      el.style.transition = "opacity 0.7s ease, transform 0.7s ease";
+      revealRefs.current.push(el);
+    }
+  };
+
+  const mono: React.CSSProperties = { fontFamily: "var(--font-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase" };
+  const display: React.CSSProperties = { fontFamily: "var(--font-display), 'Cormorant Garamond', Georgia, serif" };
+  const body: React.CSSProperties = { fontFamily: "var(--font-body), 'Outfit', system-ui, sans-serif" };
+
+  const sectionLabel: React.CSSProperties = { ...mono, color: "var(--fern)", display: "block", marginBottom: "0.6rem" };
+  const sectionH2: React.CSSProperties = { ...display, fontWeight: 300, fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1, color: "var(--pine)", marginBottom: "1.2rem" };
+  const bodyText: React.CSSProperties = { ...body, fontWeight: 300, fontSize: "0.98rem", lineHeight: 1.8, color: "var(--mid)", maxWidth: "640px" };
+  const card: React.CSSProperties = { background: "var(--linen)", border: "1px solid var(--canvas)", padding: "1.5rem", borderRadius: "3px" };
+  const divider: React.CSSProperties = { border: "none", borderTop: "1px solid var(--canvas)", margin: "3rem 0" };
+  const inner: React.CSSProperties = { maxWidth: "860px", margin: "0 auto", padding: "6rem 2rem" };
+
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "var(--color-soil)",
-        color: "var(--color-linen)",
-        fontFamily: "var(--font-body)",
-      }}
-    >
-      <nav
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "1.25rem 2rem",
-          borderBottom: "1px solid var(--color-bark)",
-          position: "sticky",
-          top: 0,
-          backgroundColor: "var(--color-soil)",
-        }}
-      >
-        <span
-          style={{
-            fontSize: "1rem",
-            fontWeight: 700,
-            letterSpacing: "0.06em",
-            textTransform: "uppercase",
-            color: "var(--color-moss)",
-            fontFamily: "var(--font-display)",
-          }}
-        >
-          Kate Haan
+    <div style={{ ...body, minHeight: "100vh" }}>
+
+      {/* NAV */}
+      <nav style={{
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+        background: "var(--pine)", borderBottom: "1px solid rgba(255,255,255,0.06)",
+        padding: "0 2rem", display: "flex", alignItems: "center", justifyContent: "space-between", height: "56px",
+      }}>
+        <span style={{ ...display, fontStyle: "italic", fontWeight: 300, fontSize: "1.1rem", color: "var(--bone)", letterSpacing: "0.12em" }}>
+          Kate — Portfolio
         </span>
-        <div style={{ display: "flex", gap: "1.25rem", flexWrap: "wrap" }}>
-          <a
-            href="#home"
-            style={{ color: "var(--color-amber)", textDecoration: "none", fontFamily: "var(--font-body)" }}
-          >
-            Home
-          </a>
-          <a
-            href="#work"
-            style={{ color: "var(--color-amber)", textDecoration: "none", fontFamily: "var(--font-body)" }}
-          >
-            Work
-          </a>
-          <a
-            href="#contact"
-            style={{ color: "var(--color-amber)", textDecoration: "none", fontFamily: "var(--font-body)" }}
-          >
-            Contact
-          </a>
-        </div>
+        <ul style={{ display: "flex", gap: "1.8rem", listStyle: "none" }}>
+          {["Now", "Work", "Tools", "About"].map((item) => (
+            <li key={item}>
+              <a href={`#${item.toLowerCase()}`} style={{ ...mono, color: "var(--muted)", textDecoration: "none" }}>
+                {item}
+              </a>
+            </li>
+          ))}
+        </ul>
       </nav>
 
-      <section
-        id="home"
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-          padding: "5rem 2rem 3rem",
-        }}
-      >
-        <p
-          style={{
-            margin: 0,
-            fontSize: "0.8rem",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: "var(--color-sage)",
-            fontFamily: "var(--font-body)",
-          }}
-        >
-          Strategy + Execution
-        </p>
-        <h1
-          style={{
-            margin: "1rem 0 1.25rem",
-            fontSize: "clamp(2rem, 4vw, 3.5rem)",
-            lineHeight: 1.1,
-            color: "var(--color-cream)",
-            fontFamily: "var(--font-display)",
-          }}
-        >
-          I lead with strategy. I build with my hands.
-        </h1>
-        <p
-          style={{
-            maxWidth: "65ch",
-            margin: 0,
-            lineHeight: 1.75,
-            color: "var(--color-linen)",
-            fontFamily: "var(--font-body)",
-          }}
-        >
-          I spend my days leading teams and my evenings building AI agents. Also bees.
-        </p>
+      {/* HERO — dark pine, full viewport */}
+      <section style={{
+        minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "flex-end",
+        background: "var(--pine)", position: "relative", overflow: "hidden", paddingTop: "56px",
+      }}>
+        <div style={{ position: "absolute", top: "-15%", right: "-8%", width: "50vw", height: "50vw", borderRadius: "50%", background: "radial-gradient(circle, rgba(196,136,42,0.15) 0%, transparent 65%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", bottom: "-12%", left: "-6%", width: "38vw", height: "38vw", borderRadius: "50%", background: "radial-gradient(circle, rgba(168,72,50,0.12) 0%, transparent 65%)", pointerEvents: "none" }} />
+        <div style={{ maxWidth: "860px", margin: "0 auto", padding: "0 2rem 5rem", position: "relative", zIndex: 1, width: "100%" }}>
+          <p style={{ ...mono, color: "var(--sage)", marginBottom: "2rem", display: "flex", alignItems: "center", gap: "1rem" }}>
+            <span style={{ display: "inline-block", width: "32px", height: "1px", background: "var(--sage)" }} />
+            Portfolio · 2026
+          </p>
+          <h1 style={{ ...display, fontWeight: 300, fontSize: "clamp(3.5rem, 10vw, 7rem)", lineHeight: 0.95, color: "var(--bone)", marginBottom: "1.5rem", letterSpacing: "-0.01em" }}>
+            Kate<br />
+            <span style={{ fontStyle: "italic", color: "var(--amber)" }}>Building.</span>
+          </h1>
+          <p style={{ ...body, fontWeight: 300, fontSize: "0.88rem", letterSpacing: "0.04em", color: "rgba(250,248,245,0.55)", marginBottom: "3rem", maxWidth: "480px", lineHeight: 1.75 }}>
+            Director of Digital · Builder · Daily Shipper · West Michigan
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem", marginBottom: "2.5rem" }}>
+            {["Builder", "Systems Thinker", "Daily Shipper", "Beekeeper"].map((pill) => (
+              <span key={pill} style={{ ...mono, padding: "0.4rem 0.9rem", border: "1px solid rgba(250,248,245,0.18)", color: "rgba(250,248,245,0.45)", borderRadius: "2px" }}>
+                {pill}
+              </span>
+            ))}
+          </div>
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            <a href="#now" style={{ ...mono, padding: "0.5rem 1.4rem", border: "1px solid var(--mustard)", color: "var(--mustard)", textDecoration: "none", borderRadius: "2px" }}>
+              Now →
+            </a>
+            <a href="#work" style={{ ...mono, padding: "0.5rem 1.4rem", border: "1px solid rgba(250,248,245,0.18)", color: "rgba(250,248,245,0.45)", textDecoration: "none", borderRadius: "2px" }}>
+              Work
+            </a>
+          </div>
+        </div>
       </section>
 
-      <section
-        id="work"
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-          padding: "1rem 2rem 5rem",
-        }}
-      >
-        <h2
-          style={{
-            margin: "0 0 1.5rem",
-            fontSize: "1.5rem",
-            color: "var(--color-cream)",
-            fontFamily: "var(--font-display)",
-          }}
-        >
-          Selected Work
-        </h2>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-            gap: "1rem",
-          }}
-        >
-          {projects.map((project) => (
-            <article
-              key={project.number}
-              style={{
-                padding: "1.25rem",
-                border: "1px solid var(--color-bark)",
-                backgroundColor: "var(--color-soil)",
-                borderRadius: "10px",
-              }}
-            >
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: "0.8rem",
-                  letterSpacing: "0.14em",
-                  color: "var(--color-sage)",
-                  textTransform: "uppercase",
-                  fontFamily: "var(--font-body)",
-                }}
-              >
-                {project.number}
+      {/* LIGHT SECTIONS — bone background from here down */}
+      <div style={{ background: "var(--bone)", color: "var(--ink)" }}>
+
+        {/* NOW */}
+        <section id="now" style={inner}>
+          <div ref={reveal}>
+            <span style={sectionLabel}>Now — April 2026</span>
+            <h2 style={sectionH2}>What I'm working on.</h2>
+            <hr style={divider} />
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1.5rem" }}>
+              {[
+                { title: "OpenClaw", body: "5 named agents running home and work. Heidi, Sage, Finn, Norah, Frank. Production daily.", accent: "var(--mustard)" },
+                { title: "Commercial Realization Engine", body: "Building the connected operating system at Herbalife — measurement + experience delivery as one.", accent: "var(--fern)" },
+                { title: "This site", body: "Built in public. Every section ships before it's perfect. That's the point.", accent: "var(--rust)" },
+              ].map((c) => (
+                <div key={c.title} style={{ ...card, borderLeft: `3px solid ${c.accent}` }}>
+                  <h3 style={{ ...mono, color: "var(--pine)", marginBottom: "0.5rem" }}>{c.title}</h3>
+                  <p style={{ ...bodyText, margin: 0, fontSize: "0.87rem" }}>{c.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <div style={{ borderTop: "1px solid var(--canvas)", maxWidth: "860px", margin: "0 auto" }} />
+
+        {/* WORK */}
+        <section id="work" style={inner}>
+          <div ref={reveal}>
+            <span style={sectionLabel}>Work</span>
+            <h2 style={sectionH2}>Things I have built.</h2>
+            <hr style={divider} />
+
+            {/* Quote */}
+            <div style={{ borderLeft: "3px solid var(--mustard)", padding: "1.2rem 1.8rem", marginBottom: "3rem", background: "rgba(196,136,42,0.05)", borderRadius: "0 3px 3px 0" }}>
+              <p style={{ ...display, fontStyle: "italic", fontSize: "1.3rem", color: "var(--pine)", lineHeight: 1.55, margin: 0, maxWidth: "100%" }}>
+                My career is a through-line of building things that didn't exist before — in industries that didn't always know they needed them yet.
               </p>
-              <h3
-                style={{
-                  margin: "0.6rem 0",
-                  color: "var(--color-cream)",
-                  fontFamily: "var(--font-display)",
-                }}
-              >
-                {project.title}
-              </h3>
-              <p
-                style={{
-                  margin: "0 0 1rem",
-                  lineHeight: 1.65,
-                  color: "var(--color-linen)",
-                  fontFamily: "var(--font-body)",
-                }}
-              >
-                {project.description}
-              </p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    style={{
-                      fontSize: "0.75rem",
-                      padding: "0.35rem 0.55rem",
-                      backgroundColor: "var(--color-soil)",
-                      border: "1px solid var(--color-moss)",
-                      borderRadius: "999px",
-                      color: "var(--color-fern)",
-                      fontFamily: "var(--font-body)",
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+              {workItems.map((item) => (
+                <div key={item.num} ref={reveal} style={{ ...card, borderLeft: `3px solid ${item.borderColor}` }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "0.75rem", flexWrap: "wrap", gap: "0.5rem" }}>
+                    <div>
+                      <span style={{ ...mono, color: "var(--mustard)", display: "block", marginBottom: "0.3rem" }}>{item.company}</span>
+                      <h3 style={{ ...body, fontWeight: 500, fontSize: "0.95rem", color: "var(--pine)", letterSpacing: "0.01em" }}>{item.title}</h3>
+                    </div>
+                    <span style={{ ...display, fontSize: "2rem", fontWeight: 300, color: "var(--canvas)", lineHeight: 1 }}>{item.num}</span>
+                  </div>
+                  <p style={{ ...bodyText, marginBottom: "1rem", fontSize: "0.9rem" }}>{item.desc}</p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+                    {item.tags.map((tag) => (
+                      <span key={tag} style={{ ...mono, fontSize: "0.55rem", padding: "0.25rem 0.65rem", border: "1px solid var(--canvas)", color: "var(--muted)", borderRadius: "2px" }}>{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <div style={{ borderTop: "1px solid var(--canvas)", maxWidth: "860px", margin: "0 auto" }} />
+
+        {/* TOOLS */}
+        <section id="tools" style={inner}>
+          <div ref={reveal}>
+            <span style={sectionLabel}>Tools — live & in dev</span>
+            <h2 style={sectionH2}>Things I have shipped.</h2>
+            <hr style={divider} />
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
+              {toolItems.map((tool) => (
+                <a key={tool.name} href={tool.url} target={tool.url !== "#" ? "_blank" : undefined} rel="noopener noreferrer"
+                  style={{ ...card, textDecoration: "none", display: "block", borderLeft: `3px solid ${tool.status === "Live" ? "var(--fern)" : "var(--canvas)"}` }}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.75rem" }}>
+                    <h3 style={{ ...body, fontWeight: 500, fontSize: "0.9rem", color: "var(--pine)" }}>{tool.name}</h3>
+                    <span style={{ ...mono, fontSize: "0.52rem", padding: "0.2rem 0.6rem", background: tool.status === "Live" ? "rgba(46,74,62,0.1)" : "rgba(196,136,42,0.08)", color: tool.status === "Live" ? "var(--fern)" : "var(--mustard)", border: `1px solid ${tool.status === "Live" ? "var(--fern)" : "var(--mustard)"}`, borderRadius: "2px" }}>
+                      {tool.status}
+                    </span>
+                  </div>
+                  <p style={{ ...bodyText, margin: 0, fontSize: "0.87rem" }}>{tool.desc}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <div style={{ borderTop: "1px solid var(--canvas)", maxWidth: "860px", margin: "0 auto" }} />
+
+        {/* ABOUT */}
+        <section id="about" style={inner}>
+          <div ref={reveal}>
+            <span style={sectionLabel}>About</span>
+            <h2 style={sectionH2}>The story so far.</h2>
+
+            <p style={{ ...display, fontStyle: "italic", fontSize: "1.35rem", lineHeight: 1.6, color: "var(--pine)", marginBottom: "1.6rem", maxWidth: "600px" }}>
+              I build the systems, teams, and strategies that turn complexity into clarity — and I do it with rigor, imagination, and a long view.
+            </p>
+
+            <hr style={divider} />
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem", alignItems: "start" }}>
+              <div>
+                <p style={{ ...bodyText, marginBottom: "1.2rem" }}>
+                  16+ years building data products, analytics teams, and digital infrastructure. Gap, Amway, Vera Bradley, Victoria's Secret, Meijer — and now a global health & wellness company where I lead measurement, insights, campaign ops, and comm ops.
+                </p>
+                <p style={{ ...bodyText, marginBottom: "1.2rem" }}>
+                  I'm a systems thinker. I walk into broken orgs and see the intake problem, the handoff gap, the measurement void, and the team structure issue — usually before anyone's named them.
+                </p>
+                <p style={{ ...bodyText }}>
+                  I also teach Pilates, keep bees, and run a small farm in West Michigan with a 17-hand Percheron/Thoroughbred named Odin. I've considered getting a PhD purely because I love learning that much.
+                </p>
               </div>
-            </article>
-          ))}
-        </div>
-      </section>
 
-      <section
-        id="journey"
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-          padding: "1rem 2rem 5rem",
-        }}
-      >
-        <p
-          style={{
-            margin: 0,
-            fontSize: "0.8rem",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: "var(--color-sage)",
-            fontFamily: "var(--font-body)",
-          }}
-        >
-          Journey
-        </p>
-        <h2
-          style={{
-            margin: "1rem 0 1.5rem",
-            fontSize: "clamp(1.8rem, 3.2vw, 2.8rem)",
-            lineHeight: 1.2,
-            color: "var(--color-cream)",
-            fontFamily: "var(--font-display)",
-          }}
-        >
-          Career Timeline
-        </h2>
-
-        <div
-          style={{
-            position: "relative",
-            paddingLeft: "2rem",
-            borderLeft: "2px solid var(--color-moss)",
-            display: "grid",
-            gap: "1.25rem",
-          }}
-        >
-          {journeyEntries.map((entry) => (
-            <article
-              key={`${entry.company}-${entry.years}`}
-              style={{
-                position: "relative",
-                border: "1px solid var(--color-bark)",
-                borderRadius: "10px",
-                backgroundColor: "var(--color-soil)",
-                padding: "1rem 1rem 1rem 1.1rem",
-              }}
-            >
-              <span
-                aria-hidden="true"
-                style={{
-                  position: "absolute",
-                  left: "-2.4rem",
-                  top: "1.05rem",
-                  width: "0.75rem",
-                  height: "0.75rem",
-                  borderRadius: "999px",
-                  backgroundColor: "var(--color-moss)",
-                  border: "2px solid var(--color-soil)",
-                }}
-              />
-              <h3
-                style={{
-                  margin: "0 0 0.35rem",
-                  color: "var(--color-cream)",
-                  fontFamily: "var(--font-display)",
-                }}
-              >
-                {entry.company}
-              </h3>
-              <p
-                style={{
-                  margin: "0 0 0.75rem",
-                  fontSize: "0.85rem",
-                  letterSpacing: "0.05em",
-                  textTransform: "none",
-                  color: "var(--color-sage)",
-                  fontFamily: "var(--font-body)",
-                }}
-              >
-                {entry.title} · {entry.years}
-              </p>
-              <p
-                style={{
-                  margin: 0,
-                  lineHeight: 1.7,
-                  color: "var(--color-linen)",
-                  fontFamily: "var(--font-body)",
-                }}
-              >
-                {entry.description}
-              </p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section
-        id="about"
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-          padding: "1rem 2rem 5rem",
-        }}
-      >
-        <p
-          style={{
-            margin: 0,
-            fontSize: "0.8rem",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: "var(--color-sage)",
-            fontFamily: "var(--font-body)",
-          }}
-        >
-          About
-        </p>
-        <h2
-          style={{
-            margin: "1rem 0 1.25rem",
-            fontSize: "clamp(1.8rem, 3.2vw, 2.8rem)",
-            lineHeight: 1.2,
-            color: "var(--color-cream)",
-            fontFamily: "var(--font-display)",
-          }}
-        >
-          I build new things with heart, grit, and curiosity.
-        </h2>
-        <p
-          style={{
-            maxWidth: "70ch",
-            margin: "0 0 1rem",
-            lineHeight: 1.75,
-            color: "var(--color-linen)",
-            fontFamily: "var(--font-body)",
-          }}
-        >
-          For 16+ years, I have loved building from zero to one: new teams, new systems, and new
-          ways of working that help people move faster with more clarity. I am energized by early
-          ambiguity and the moment an idea becomes something real and useful.
-        </p>
-        <p
-          style={{
-            maxWidth: "70ch",
-            margin: "0 0 1.5rem",
-            lineHeight: 1.75,
-            color: "var(--color-linen)",
-            fontFamily: "var(--font-body)",
-          }}
-        >
-          My CliftonStrengths top five are Learner, Futurist, Competition, Focus, and Maximizer.
-          Outside work, I teach Pilates and run a farm in West Michigan with my horse, Odin.
-          Life there keeps me grounded, playful, and deeply connected to what matters.
-        </p>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-          {["Learner", "Futurist", "Competition", "Focus", "Maximizer"].map((strength) => (
-            <span
-              key={strength}
-              style={{
-                fontSize: "0.75rem",
-                padding: "0.35rem 0.55rem",
-                backgroundColor: "var(--color-soil)",
-                border: "1px solid var(--color-moss)",
-                borderRadius: "999px",
-                color: "var(--color-fern)",
-                fontFamily: "var(--font-body)",
-              }}
-            >
-              {strength}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      <section
-        id="stack"
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-          padding: "1rem 2rem 5rem",
-        }}
-      >
-        <p
-          style={{
-            margin: 0,
-            fontSize: "0.8rem",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: "var(--color-sage)",
-            fontFamily: "var(--font-body)",
-          }}
-        >
-          Stack
-        </p>
-        <h2
-          style={{
-            margin: "1rem 0 1.5rem",
-            fontSize: "clamp(1.8rem, 3vw, 2.6rem)",
-            lineHeight: 1.2,
-            color: "var(--color-cream)",
-            fontFamily: "var(--font-display)",
-          }}
-        >
-          Tools I use to build, measure, and ship.
-        </h2>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: "1rem",
-          }}
-        >
-          {stackCategories.map((category) => (
-            <article
-              key={category.label}
-              style={{
-                border: "1px solid var(--color-bark)",
-                borderRadius: "10px",
-                backgroundColor: "var(--color-soil)",
-                padding: "1rem",
-              }}
-            >
-              <p
-                style={{
-                  margin: "0 0 0.75rem",
-                  fontSize: "0.8rem",
-                  letterSpacing: "0.14em",
-                  textTransform: "uppercase",
-                  color: "var(--color-sage)",
-                  fontFamily: "var(--font-body)",
-                }}
-              >
-                {category.label}
-              </p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                {category.tools.map((tool) => (
-                  <span
-                    key={tool}
-                    style={{
-                      fontSize: "0.75rem",
-                      padding: "0.35rem 0.55rem",
-                      backgroundColor: "var(--color-soil)",
-                      border: "1px solid var(--color-moss)",
-                      borderRadius: "999px",
-                      color: "var(--color-fern)",
-                      fontFamily: "var(--font-body)",
-                    }}
-                  >
-                    {tool}
-                  </span>
-                ))}
+              <div>
+                <h3 style={{ ...mono, color: "var(--pine)", marginBottom: "1.2rem" }}>CliftonStrengths · Top 5</h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.7rem" }}>
+                  {strengthItems.map((s) => (
+                    <div key={s.num} style={{ display: "flex", alignItems: "flex-start", gap: "1rem", padding: "1rem 1.4rem", background: "var(--linen)", border: "1px solid var(--canvas)", borderRadius: "3px" }}>
+                      <span style={{ ...mono, color: "var(--fern)", paddingTop: "3px", minWidth: "22px" }}>{s.num}</span>
+                      <div>
+                        <p style={{ ...mono, color: "var(--pine)", marginBottom: "0.2rem" }}>{s.name}</p>
+                        <p style={{ ...body, fontWeight: 300, fontSize: "0.87rem", color: "var(--mid)", lineHeight: 1.6, margin: 0 }}>{s.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </article>
-          ))}
-        </div>
-      </section>
+            </div>
 
-      <section
-        id="contact"
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-          padding: "1rem 2rem 5rem",
-        }}
-      >
-        <p
-          style={{
-            margin: 0,
-            fontSize: "0.8rem",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: "var(--color-sage)",
-            fontFamily: "var(--font-body)",
-          }}
-        >
-          Contact
-        </p>
-        <h2
-          style={{
-            margin: "1rem 0 1.25rem",
-            fontSize: "clamp(1.8rem, 3.2vw, 2.8rem)",
-            lineHeight: 1.2,
-            color: "var(--color-cream)",
-            fontFamily: "var(--font-display)",
-          }}
-        >
-          If this resonates, I would love to connect.
-        </h2>
-        <p
-          style={{
-            maxWidth: "68ch",
-            margin: "0 0 1rem",
-            lineHeight: 1.75,
-            color: "var(--color-linen)",
-            fontFamily: "var(--font-body)",
-          }}
-        >
-          I am always open to thoughtful conversations about building better systems, teams, and
-          digital experiences.
-        </p>
-        <p
-          style={{
-            maxWidth: "68ch",
-            margin: "0 0 1.5rem",
-            lineHeight: 1.75,
-            color: "var(--color-linen)",
-            fontFamily: "var(--font-body)",
-          }}
-        >
-          Reach out on LinkedIn or take a look at what I am building on GitHub.
-        </p>
-        <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-          <a
-            href="https://www.linkedin.com/in/katehaan/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-block",
-              padding: "0.65rem 1rem",
-              borderRadius: "999px",
-              border: "1px solid var(--color-moss)",
-              color: "var(--color-amber)",
-              textDecoration: "none",
-              fontFamily: "var(--font-body)",
-              backgroundColor: "var(--color-soil)",
-            }}
-          >
-            LinkedIn
-          </a>
-          <a
-            href="https://github.com/kaitwaite"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-block",
-              padding: "0.65rem 1rem",
-              borderRadius: "999px",
-              border: "1px solid var(--color-moss)",
-              color: "var(--color-amber)",
-              textDecoration: "none",
-              fontFamily: "var(--font-body)",
-              backgroundColor: "var(--color-soil)",
-            }}
-          >
-            GitHub
-          </a>
-        </div>
-      </section>
+            <hr style={divider} />
 
-      <footer
-        style={{
-          borderTop: "1px solid var(--color-bark)",
-          marginTop: "1rem",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1100px",
-            margin: "0 auto",
-            padding: "1rem 2rem 2rem",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: "1rem",
-            flexWrap: "wrap",
-            fontSize: "0.8rem",
-            color: "var(--color-linen)",
-            fontFamily: "var(--font-body)",
-          }}
-        >
-          <span>Kate Haan</span>
-          <span>{new Date().getFullYear()}</span>
-        </div>
-      </footer>
-    </main>
+            <div style={{ ...card, borderLeft: "3px solid var(--mustard)" }}>
+              <p style={{ ...display, fontStyle: "italic", fontSize: "1.4rem", color: "var(--pine)", lineHeight: 1.55, margin: 0 }}>
+                "The most strategic thing I can do is be entirely, specifically myself — and make sure the right people can find that."
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* FOOTER */}
+        <footer style={{ background: "var(--pine)", padding: "3rem 2rem", textAlign: "center" }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: "2rem", marginBottom: "1rem" }}>
+            {[
+              { href: "https://www.linkedin.com/in/katehaan/", label: "LinkedIn" },
+              { href: "https://github.com/kaitwaite", label: "GitHub" },
+              { href: "https://brand-book.katehaan.dev", label: "Brand Book" },
+            ].map((link) => (
+              <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer"
+                style={{ ...mono, color: "rgba(250,248,245,0.35)", textDecoration: "none", fontSize: "0.58rem" }}>
+                {link.label}
+              </a>
+            ))}
+          </div>
+          <p style={{ ...mono, fontSize: "0.56rem", color: "rgba(250,248,245,0.2)", margin: 0 }}>
+            Kate Haan · 2026 · Living document
+          </p>
+        </footer>
+
+      </div>
+    </div>
   );
 }
