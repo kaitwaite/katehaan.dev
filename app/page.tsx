@@ -86,6 +86,44 @@ const stackCategories = [
   },
 ];
 
+const journeyEntries = [
+  {
+    company: "Herbalife",
+    years: "Nov 2024–Present",
+    title: "Director of Global Measurement, Commercial Realization & MarTech Operations",
+    description:
+      "Built the global digital performance organization from scratch, spanning measurement strategy, campaign operations, and communications platform delivery across global markets. Created the connective tissue between data, media, and execution so teams could move with more clarity and speed.",
+  },
+  {
+    company: "Gap Inc.",
+    years: "Nov 2021–Nov 2024",
+    title: "Senior Manager, Enterprise Data Products",
+    description:
+      "Defined the vision and built the Enterprise BI Center of Excellence serving 5000+ weekly active users across a $16B brand portfolio. Led product strategy, operating rhythms, and adoption programs that made trusted data more useful in everyday decisions.",
+  },
+  {
+    company: "Amway",
+    years: "Jan 2020–Nov 2021",
+    title: "Senior Digital Strategist",
+    description:
+      "Owned digital product strategy for a global $8.9B CPG organization, including roadmap planning presented to board and executive leadership. Helped align cross-functional teams around measurable priorities and a more coherent customer experience.",
+  },
+  {
+    company: "Vera Bradley",
+    years: "Apr 2016–Jan 2020",
+    title: "Digital Analytics Manager, then Senior Digital Product Owner",
+    description:
+      "Built the Digital Analytics function from scratch and established a scalable measurement foundation for mobile and web. Later led agile product delivery to turn insight into shipped features and stronger digital outcomes.",
+  },
+  {
+    company: "Earlier Roles",
+    years: "Before 2016",
+    title: "Meijer and Rosler Metal Finishing",
+    description:
+      "Early chapters at Meijer and Rosler Metal Finishing shaped my approach to operations, analysis, and practical problem solving. Those roles built the foundation for how I lead today: hands-on, people-centered, and outcomes-focused.",
+  },
+];
+
 export default function Home() {
   return (
     <main
@@ -171,7 +209,7 @@ export default function Home() {
             fontFamily: "var(--font-display)",
           }}
         >
-          Building modern digital systems that turn insight into action.
+          I lead with strategy. I build with my hands.
         </h1>
         <p
           style={{
@@ -182,9 +220,7 @@ export default function Home() {
             fontFamily: "var(--font-body)",
           }}
         >
-          I lead digital, analytics, and AI initiatives with a focus on measurable outcomes.
-          The work below spans enterprise transformation, performance measurement, and practical
-          systems that help teams ship faster.
+          I spend my days leading teams and my evenings building AI agents. Also bees.
         </p>
       </section>
 
@@ -272,6 +308,107 @@ export default function Home() {
                   </span>
                 ))}
               </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section
+        id="journey"
+        style={{
+          maxWidth: "1100px",
+          margin: "0 auto",
+          padding: "1rem 2rem 5rem",
+        }}
+      >
+        <p
+          style={{
+            margin: 0,
+            fontSize: "0.8rem",
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            color: "var(--color-sage)",
+            fontFamily: "var(--font-body)",
+          }}
+        >
+          Journey
+        </p>
+        <h2
+          style={{
+            margin: "1rem 0 1.5rem",
+            fontSize: "clamp(1.8rem, 3.2vw, 2.8rem)",
+            lineHeight: 1.2,
+            color: "var(--color-cream)",
+            fontFamily: "var(--font-display)",
+          }}
+        >
+          Career Timeline
+        </h2>
+
+        <div
+          style={{
+            position: "relative",
+            paddingLeft: "2rem",
+            borderLeft: "2px solid var(--color-moss)",
+            display: "grid",
+            gap: "1.25rem",
+          }}
+        >
+          {journeyEntries.map((entry) => (
+            <article
+              key={`${entry.company}-${entry.years}`}
+              style={{
+                position: "relative",
+                border: "1px solid var(--color-bark)",
+                borderRadius: "10px",
+                backgroundColor: "var(--color-soil)",
+                padding: "1rem 1rem 1rem 1.1rem",
+              }}
+            >
+              <span
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  left: "-2.4rem",
+                  top: "1.05rem",
+                  width: "0.75rem",
+                  height: "0.75rem",
+                  borderRadius: "999px",
+                  backgroundColor: "var(--color-moss)",
+                  border: "2px solid var(--color-soil)",
+                }}
+              />
+              <h3
+                style={{
+                  margin: "0 0 0.35rem",
+                  color: "var(--color-cream)",
+                  fontFamily: "var(--font-display)",
+                }}
+              >
+                {entry.company}
+              </h3>
+              <p
+                style={{
+                  margin: "0 0 0.75rem",
+                  fontSize: "0.85rem",
+                  letterSpacing: "0.05em",
+                  textTransform: "none",
+                  color: "var(--color-sage)",
+                  fontFamily: "var(--font-body)",
+                }}
+              >
+                {entry.title} · {entry.years}
+              </p>
+              <p
+                style={{
+                  margin: 0,
+                  lineHeight: 1.7,
+                  color: "var(--color-linen)",
+                  fontFamily: "var(--font-body)",
+                }}
+              >
+                {entry.description}
+              </p>
             </article>
           ))}
         </div>
